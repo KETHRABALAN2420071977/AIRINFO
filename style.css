@@ -1,0 +1,476 @@
+
+/* =====================================
+   AIRINFO - LIVE WEATHER DASHBOARD
+===================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg: #0b1422;
+    --surface: #142237;
+    --surface-light: #1b2c43;
+    --text: #f3f7fc;
+    --muted: #91a3b8;
+    --accent: #78c8ff;
+    --border: rgba(255, 255, 255, 0.09);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 30px 7%;
+}
+
+/* =====================================
+   HEADER
+===================================== */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: var(--accent);
+}
+
+.header > p {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+/* =====================================
+   UNIT TOGGLE
+===================================== */
+
+.unit-toggle {
+    display: flex;
+    gap: 5px;
+    background: var(--surface);
+    padding: 5px;
+    border-radius: 25px;
+}
+
+.unit-toggle button {
+    background: transparent;
+    color: var(--muted);
+    border: none;
+    padding: 8px 13px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.unit-toggle button.active {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+/* =====================================
+   SEARCH SECTION
+===================================== */
+
+.search-section {
+    text-align: center;
+    margin: 75px auto 45px;
+}
+
+.search-section h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.search-section > p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* SEARCH BOX */
+
+.search-box {
+    width: min(560px, 100%);
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px 8px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: 0.3s;
+}
+
+.search-box:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(120, 200, 255, 0.08);
+}
+
+.search-icon {
+    font-size: 23px;
+    color: var(--muted);
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.search-box input::placeholder {
+    color: var(--muted);
+}
+
+.search-box button {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 9px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background: #a4ddff;
+    transform: translateY(-2px);
+}
+
+.search-box button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* =====================================
+   ERROR AND LOADING
+===================================== */
+
+.error-message {
+    color: #ff7777;
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+.loading-message {
+    display: none;
+    color: var(--accent);
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+/* =====================================
+   RECENT SEARCHES
+===================================== */
+
+.recent-searches {
+    width: min(560px, 100%);
+    margin: 22px auto 0;
+    text-align: left;
+}
+
+.recent-title {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.recent-cities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.recent-city-btn {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 9px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.recent-city-btn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* =====================================
+   CURRENT WEATHER
+===================================== */
+
+.weather-section {
+    width: min(850px, 100%);
+    margin: 40px auto;
+    padding: 35px;
+    background: linear-gradient(
+        135deg,
+        var(--surface),
+        #182b43
+    );
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.weather-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weather-heading h2 {
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+.weather-heading p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.weather-icon {
+    font-size: 65px;
+}
+
+.temperature-section {
+    margin: 35px 0;
+}
+
+.temperature-section h1 {
+    font-size: clamp(65px, 10vw, 95px);
+    font-weight: 700;
+    letter-spacing: -5px;
+}
+
+.temperature-section p {
+    color: var(--muted);
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.temperature-section #weather-description {
+    color: var(--accent);
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/* =====================================
+   WEATHER DETAILS
+===================================== */
+
+.weather-details {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.weather-card {
+    background: rgba(255, 255, 255, 0.035);
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: 0.3s;
+}
+
+.weather-card:hover {
+    background: var(--surface-light);
+    transform: translateY(-3px);
+}
+
+.weather-card p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.weather-card h3 {
+    font-size: 19px;
+    font-weight: 700;
+}
+
+/* =====================================
+   FORECAST SECTION
+===================================== */
+
+.forecast-section {
+    width: min(850px, 100%);
+    margin: 55px auto;
+}
+
+.forecast-section h2 {
+    font-size: 23px;
+    margin-bottom: 22px;
+}
+
+.forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+}
+
+.forecast-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px 12px;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.forecast-card:hover {
+    background: var(--surface-light);
+    transform: translateY(-5px);
+}
+
+.forecast-card p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.forecast-icon {
+    font-size: 30px;
+    margin: 15px 0;
+}
+
+.forecast-card h3 {
+    font-size: 19px;
+    margin-bottom: 5px;
+}
+
+.forecast-card small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 12px;
+}
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+    text-align: center;
+    padding: 25px 0;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 20px 5%;
+    }
+
+    .header > p {
+        display: none;
+    }
+
+    .search-section {
+        margin-top: 55px;
+    }
+
+    .weather-section {
+        padding: 25px 18px;
+    }
+
+    .weather-details {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .forecast-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 18px 4%;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .search-section h1 {
+        font-size: 30px;
+    }
+
+    .search-box {
+        gap: 7px;
+        padding-left: 12px;
+    }
+
+    .search-box input {
+        font-size: 12px;
+    }
+
+    .search-box button {
+        padding: 11px 12px;
+        font-size: 11px;
+    }
+
+    .weather-heading h2 {
+        font-size: 20px;
+    }
+
+    .weather-icon {
+        font-size: 48px;
+    }
+
+    .weather-details {
+        gap: 10px;
+    }
+
+    .weather-card {
+        padding: 15px;
+    }
+
+    .weather-card h3 {
+        font-size: 16px;
+    }
+
+    .forecast-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
